@@ -1,5 +1,14 @@
+# Игра "Крестики-Нолики"
+
+# Объявляем переменные
+field = [[" "]*3 for i in range(3)]
+crosses = ['X'] * 3
+nulls = ['O'] * 3
+
+
 def instruction():
     # Приветствие и инструкция
+    print(' ')
     print('       Крестики-Нолики          ')
     print('           X  vs  O             ')
     print('--------------------------------')
@@ -84,24 +93,62 @@ def check_column():
             values.append(field[j][i])
         if values == crosses:
             for row in field:
-                row[i] = 'I'
+                row[i] = '|'
             output()
             print(' ')
             print('Крестики победили!')
             return True
         if values == nulls:
             for row in field:
-                row[i] = 'I'
+                row[i] = '|'
             output()
             print(' ')
             print('Нолики победили!')
             return True
     return False
 
+   
+def check_diag():
+    # Проверяем выйгрыш по диагонали
+    values = []
+    for i in range(3):
+        values.append(field[i][i])
+    if values == crosses:
+        for i,row in enumerate(field):
+            row[i] = '\\'
+        output()
+        print(' ')
+        print('Крестики победили!')
+        return True
+    if values == nulls:
+        for i,row in enumerate(field):
+            row[i] = '\\'
+        output()
+        print(' ')
+        print('Нолики победили!')
+        return True
+        
+    values = []
+    for i in range(3):
+        values.append(field[i][abs(i-2)])
+    if values == crosses:
+        for i,row in enumerate(field):
+            row[abs(i-2)] = "/"
+        output()
+        print(' ')
+        print('Крестики победили!')
+        return True
+    if values == nulls:
+        for i,row in enumerate(field):
+            row[abs(i-2)] = "/"
+        output()
+        print(' ')
+        print('Нолики победили!')
+        return True
+    
+    return False
 
-field = [[" "]*3 for i in range(3)]
-crosses = ['X'] * 3
-nulls = ['O'] * 3
+
 rounds = 0
 
 instruction()
