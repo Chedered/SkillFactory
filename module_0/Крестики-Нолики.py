@@ -1,7 +1,7 @@
 # Игра "Крестики-Нолики"
 
 # Объявляем переменные
-field = [[" "]*3 for i in range(3)]
+field = [[" "] * 3 for i in range(3)]
 crosses = ['X'] * 3
 nulls = ['O'] * 3
 
@@ -107,45 +107,45 @@ def check_column():
             return True
     return False
 
-   
+
 def check_diag():
     # Проверяем выйгрыш по диагонали
     values = []
     for i in range(3):
         values.append(field[i][i])
     if values == crosses:
-        for i,row in enumerate(field):
+        for i, row in enumerate(field):
             row[i] = '\\'
         output()
         print(' ')
         print('Крестики победили!')
         return True
     if values == nulls:
-        for i,row in enumerate(field):
+        for i, row in enumerate(field):
             row[i] = '\\'
         output()
         print(' ')
         print('Нолики победили!')
         return True
-        
+
     values = []
     for i in range(3):
-        values.append(field[i][abs(i-2)])
+        values.append(field[i][abs(i - 2)])
     if values == crosses:
-        for i,row in enumerate(field):
-            row[abs(i-2)] = "/"
+        for i, row in enumerate(field):
+            row[abs(i - 2)] = "/"
         output()
         print(' ')
         print('Крестики победили!')
         return True
     if values == nulls:
-        for i,row in enumerate(field):
-            row[abs(i-2)] = "/"
+        for i, row in enumerate(field):
+            row[abs(i - 2)] = "/"
         output()
         print(' ')
         print('Нолики победили!')
         return True
-    
+
     return False
 
 
@@ -175,6 +175,9 @@ while True:
         break
 
     if check_column():
+        break
+
+    if check_diag():
         break
 
     if rounds == 9:
