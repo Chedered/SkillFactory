@@ -133,14 +133,14 @@ def check_diag():
         values.append(field[i][abs(i - 2)])
     if values == crosses:
         for i, row in enumerate(field):
-            row[abs(i - 2)] = "/"
+            row[abs(i - 2)] = '/'
         output()
         print(' ')
         print('Крестики победили!')
         return True
     if values == nulls:
         for i, row in enumerate(field):
-            row[abs(i - 2)] = "/"
+            row[abs(i - 2)] = '/'
         output()
         print(' ')
         print('Нолики победили!')
@@ -148,6 +148,8 @@ def check_diag():
 
     return False
 
+
+# Запуск игры
 
 rounds = 0
 
