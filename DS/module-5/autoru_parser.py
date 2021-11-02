@@ -85,11 +85,10 @@ def get_car_dict(car):
     except KeyError:
         return False
 
-    brand = car['vehicle_info']['mark_info']['name']
-    model = car['vehicle_info']['model_info']['name']
+    brand = car['vehicle_info']['mark_info']['code']
+    model = car['vehicle_info']['model_info']['code']
     sell_id = car['saleId']
-    section = car['section']
-    car_url = f'https://auto.ru/cars/{section}/sale/{brand.lower()}/{model.lower()}/{sell_id}/'
+    car_url = f'https://auto.ru/cars/used/sale/{brand.lower()}/{model.lower()}/{sell_id}/'
 
     response = ''
     while response == '':
@@ -173,6 +172,11 @@ def get_car_dict(car):
         transmission = None
 
     try:
+        start_date = soup.find('div', class_='CardHead__infoItem CardHead__creationDate').text
+    except:
+        start_date = None
+
+    try:
         description = car['description']
     except KeyError:
         description = None
@@ -199,7 +203,7 @@ def get_car_dict(car):
                 'vehicleConfiguration': body_type + " " + eng_transmission + " " + str(engine_volume),
                 'vehicleTransmission': transmission, 'vendor': car['vehicle_info']['vendor'],
                 'Владельцы': ownersCount, 'Владение': owningTime, 'ПТС': pts, 'Привод': drive, 'Руль': wheel,
-                'Состояние': state, 'Таможня': customs, 'price': price}
+                'Состояние': state, 'Таможня': customs, 'price': price, 'start_date': start_date}
 
     return car_dict
 
